@@ -1,0 +1,710 @@
+{% extends 'html_wrapper.html' %}
+{% block head %}
+<!-- font  -->
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<!-- Owl Carousel css-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" />
+<!-- jquery css-->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<!-- Google Fonts -->
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500&display=swap"
+    rel="stylesheet" />
+<!--animate Css-->
+<link rel="stylesheet" href="assets/css/animate.css" />
+<!-- Style CSS -->
+<link rel="stylesheet" href="assets/css/style.css" />
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="assets/css/responsive.css" />
+{% endblock head %}
+{% block  body %}
+<!-- Modal -->
+<div class="modal fade" id="RegistrationModal" tabindex="-1" aria-labelledby="RegistrationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="RegistrationModalLabel">Registration</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="sign-up-form" action="submit" method="POST">
+                    <input type="hidden" value="{{ csrf_token }}" name="csrfmiddlewaretoken" />
+                    <div class="row">
+                        <div class="input-container ic1 mb-4 col-md-6 col-sm-12">
+                            <input id="RName" class="input" name="name" type="text" placeholder=" " required />
+                            <div class="cut"></div>
+                            <label for="RName" class="form-label">Name</label>
+                        </div>
+                        <div class="input-container ic1 mb-4 col-md-6 col-sm-12">
+                            <input id="REmail" class="input" name="email"
+                                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$" type="email" placeholder=" "
+                                required />
+                            <div class="cut"></div>
+                            <label for="REmail" class="form-label">Email Address </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-container  mb-4 col-md-6 col-sm-12">
+                            <input id="RMobile" class="input" type="number" name="mobile" maxlength="10" placeholder=" "
+                                required />
+                            <div class="cut"></div>
+                            <label for="RMobile" class="form-label">Mobile</label>
+                        </div>
+                        <div class="input-container  mb-4 col-md-6 col-sm-12">
+                            <input id="CollegeName" class="input" type="text" name="collegeName" placeholder=" "
+                                required />
+                            <div class="cut"></div>
+                            <label class="form-label" for="CollegeName">College Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-container mb-4 col-md-6 col-sm-12">
+                            <input class="input" id="DepartmentName" required name="departmentName" placeholder=" "
+                                type="text" />
+                            <div class="cut"></div>
+                            <label for="DepartmentName" class="form-label">Department Name</label>
+                        </div>
+                        <div class="input-container  mb-4 col-md-6 col-sm-12">
+                            <select id="Class" class="input" type="text" name="class" required placeholder=" ">
+                                <option value="fe">FE</option>
+                                <option value="se">SE</option>
+                                <option value="te">TE</option>
+                                <option value="be">BE</option>
+                                <option value="others">Others</option>
+                            </select>
+                            <div class="cut"></div>
+                            <label for="Class" class="form-label">Choose Class </label>
+                        </div>
+                    </div>
+                    <div class="mb-4 col-12">
+                        <div class=" mb-4 input-container">
+                            <select id="Promo" class="input" name="promotion" id="Promo" required placeholder=" ">
+                                <option value="whatsapp">WhatsApp</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="friends">Friends</option>
+                                <option value="others">Others</option>
+                            </select>
+                            <div class="cut"></div>
+                            <label for="Promo" class=" form-label">Where did you heard about this?</label>
+                        </div>
+
+                    </div>
+                    <div class=" mb-4 input-container  col-12">
+                        <input id="Address" required name="address" class="input" type="text" name="collegeName"
+                            placeholder=" " />
+                        <div class="cut"></div>
+                        <label class="form-label" for="Address">Address</label>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <small id="textHelp" class="text-muted me-auto">Your data will not be shared to anybody.</small>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class=" submit d-flex align-items-center btn btn-outline-primary">
+                    <span>Register</span>
+                    <span id="sub_icon"></span>
+                </button>
+
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal  -->
+
+  <!-- Ticket Search Modal -->
+  <div class="modal fade" id="ViewTicket" tabindex="-1" aria-labelledby="ViewTicketLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              
+              <div class="modal-header">
+                  <h5 class="modal-title text-white" id="ViewTicketLabel">View your Ticket</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/ticket/search" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" value="{{ csrf_token }}" name="csrfmiddlewaretoken" />
+
+                
+                <div class="mb-3">
+                  <input type="email" name="email" required class="form-control" id="ticketEmail" aria-describedby="ticketEmailHelp"  placeholder="Enter your Email address" >
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Ticket Model  -->
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+    <!-- START PRELOADER -->
+    <div class="atf-preloader">
+        <div class="atf-status">
+            <div class="atf-status-mes"></div>
+        </div>
+    </div>
+    <!-- END PRELOADER -->
+    <!-- Start Header Section -->
+    <header class="atf-site-header atf-style1">
+        <div class="atf-top-header">
+            <div class="container">
+                <div class="row" id="container_sticky">
+                    <div class="col-lg-9 col-md-8">
+                        <div class="atf-top-header-in wow zoomIn" data-wow-duration="1s" data-wow-delay="0.2s"
+                            data-wow-offset="0">
+                            <ul class="atf-top-header-list">
+                                <li>
+                                    <i class="fas fa-clock"></i>Day: <a href="#"> Saturday</a>
+                                </li>
+                                <li><a href="#"> | 9:00AM - 10:00PM</a></li>
+                                <li><a href="#"> | ZCOER IODump </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--- END COL -->
+                    <div class="col-lg-3 col-md-4">
+                        <div class="atf-top-social">
+                            <div class="atf-top-social-icon wow zoomIn" data-wow-duration="1s" data-wow-delay="0.2s"
+                                data-wow-offset="0">
+                                <a href="https://www.instagram.com/iodump01/" class="icon" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://github.com/iodump01" class="icon" target="_blank">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--- END COL -->
+                </div>
+                <!--- END ROW -->
+            </div>
+            <!--- END CONTAINER -->
+        </div>
+        <!--- END TOP HEADER -->
+        <div class="atf-main-header">
+            <div class="container">
+                <div class="atf-main-header-in">
+                    <div class="atf-main-header-left">
+                        <a class="atf-site-branding atf-white-logo" href="/"><img height="80" width="80"
+                                src="assets/img/io-dump-white.png" alt="Logo" /></a>
+                    </div>
+                    <div class="atf-main-header-right">
+                        <div class="atf-nav">
+                            <ul class="atf-nav-list atf-onepage-nav">
+                                <li><a href="#home" class="atf-smooth-move">Home</a></li>
+                                <li><a href="#about" class="atf-smooth-move">About</a></li>
+                                <li>
+                                    <a href="#promotion_id" class="atf-smooth-move">Register</a>
+                                </li>
+                                <li>
+                                    <a href="#contact" class="atf-smooth-move">Contact</a>
+                                </li>
+                                <li>
+                                    <a href="#event" class="atf-smooth-move">Schedule</a>
+                                </li>
+                                <li>
+                                    <a href="#atf-map-area" class="atf-smooth-move">Location</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="atf-smooth-move" data-bs-toggle="modal" data-bs-target="#ViewTicket">View Ticket</a>
+                                </li>
+                            </ul>
+                            <!--- END NAV -->
+                        </div>
+                    </div>
+                    <!--- END MAIN HEADER RIGHT -->
+                </div>
+            </div>
+            <!--- END CONTAINER -->
+        </div>
+        <!--- END MAIN HEADER -->
+    </header>
+    <!-- End Header Section -->
+    <!-- START HOME -->
+    <section id="home" class="atf-header-area atf-align-items-details" data-stellar-background-ratio="0.3" style="
+      background-image: url(https://cdn.pixabay.com/photo/2017/06/21/07/33/background-2426328_960_720.jpg);
+      background-size: cover;
+      background-position: top center;
+    ">
+        <div class="container">
+            <div class="row atf-content-details align-items-center justify-content-center">
+                <!--LEFT COL-->
+                <div class="col-xl-8 col-lg-7 col-12 atf-single-details text-center">
+                    <h1 class="h5">ZCOER, IODump</h1>
+                    <h2 class="mb-0 d-block d-lg-block">
+                        Introduction to Open Source
+                    </h2>
+                    <p class="pr-lg-5 pl-lg-5">Hacktoberfest Edition</p>
+                    <!-- Main-btn -->
+                    <div class="atf-main-btn mt-3">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="page-scroll atf-themes-btn" data-bs-toggle="modal"
+                            data-bs-target="#RegistrationModal">
+                            Register<i class="fa fa-angle-right"></i></button>
+                        <!-- Button trigger modal -->
+                    </div>
+                </div>
+                <!--- END COL -->
+            </div>
+            <!--- END ROW -->
+        </div>
+        <!--- END CONTAINER -->
+    </section>
+    <!-- END HOME -->
+    <!-- START ABOUT -->
+    <section id="about" class="atf-section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-6">
+                    <div class="atf-section-title text-center wow zoomIn" data-wow-duration="1s" data-wow-delay="0.2s"
+                        data-wow-offset="0">
+                        <h5>About the Event</h5>
+                        <h2 class="">Intro to OpenSource: HacktoberFest Edition</h2>
+                        <div class="divide"></div>
+                        <p class="mx-auto my-auto">
+                            "I often compare open source to science. Science
+                            took this whole notion of developing ideas in the
+                            open and improving on other peoples' ideas. It made
+                            science what it is today and made the incredible
+                            advances that we have had possible."
+                        </p>
+                        <div class="h5">Linus Torvalds</div>
+                        <div class="h6">(Creator of Linux and Git)</div>
+                    </div>
+                </div>
+                <!--- END COL -->
+            </div>
+            <!--- END ROW -->
+            <div class="blog-card alt">
+                <div class="meta">
+                    <div class="photo" style="
+              background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg);
+            "></div>
+                    <ul class="details">
+                        <li class="author"><a href="#">IODump</a></li>
+                        <li class="date">Oct. 15, 2022</li>
+                        <li class="tags">
+                            <ul>
+                                <li><a href="https://hacktoberfest.com">Hactober Fest</a></li>
+                                <li><a href="#">Github</a></li>
+                                <li><a href="#">JavaScript</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="description">
+                    <h1 class="text-dark h2">HACKTOBERFEST 2022</h1>
+                    <h2 class="text-dark h2">Advantages of using open source</h2>
+                    <ul class="text-dark">
+                        <li>Flexibility and agility</li>
+                        <li>Cost effectiveness</li>
+                        <li>Ability to start small</li>
+                        <li>Solid information security</li>
+                        <li>Share maintainance cost</li>
+                    </ul>
+                    <p class="read-more">
+                        <a href="https://www.opensourcealternative.to/">Read More
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <!--- END ROW -->
+        </div>
+        <!--- END CONTAINER -->
+    </section>
+    <!-- END ABOUT -->
+    <!-- START PROMOTION  -->
+    <section class="atf-promo-offer atf-align-items-details" id="promotion_id" data-stellar-background-ratio="0.3"
+        style="
+      background-image: url(https://cdn.pixabay.com/photo/2019/12/18/13/07/right-4703934__340.jpg);
+      background-size: cover;
+      background-position: center center;
+    ">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="text-center col-xl-8 col-lg-8 col-12 text-center">
+                    <div class="atf-promo-content atf-main-btn">
+                        <h3>Don't Forget To Register</h3>
+                        <div class="atf-main-btn">
+                            <button class="page-scroll atf-themes-btn" data-bs-toggle="modal"
+                                data-bs-target="#RegistrationModal">
+                                Register<i class="fa fa-angle-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- END COL  -->
+            </div>
+            <!--END  ROW  -->
+        </div>
+        <!-- END CONTAINER  -->
+    </section>
+    <!-- END PROMOTION -->
+    <!-- START NEWSLETTER -->
+    <section class="atf-newsletter atf-section-padding">
+        <h1 id="event">Event Schedule</h1>
+        <div class="timeline">
+            <div class="timeline__event animated fadeInUp delay-3s timeline__event--type1">
+                <div class="timeline__event__icon">
+                    <i class="lni-cake"></i>
+                </div>
+                <div class="timeline__event__date">
+                    <div>15th Oct 2022</div>
+                </div>
+                <div class="timeline__event__content">
+                    <div class="timeline__event__title">Introduction to Open Source</div>
+                    <div class="timeline__event__description">
+                        <p id="birthday_timeline">
+                            You will learn about basic theortical knowledge about Git/GitHub and open source.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline__event animated fadeInUp delay-2s timeline__event--type2">
+                <div class="timeline__event__icon">
+                    <i class="lni-burger"></i>
+                </div>
+                <div class="timeline__event__date">15th Oct 2022</div>
+                <div class="timeline__event__content">
+                    <div class="timeline__event__title">Live Demonstration</div>
+                    <div class="timeline__event__description">
+                        <p id="lunch_timeline">
+                            You'll have hands on practical session of Git/GitHub. You will know about HactoberFest. Live
+                            Pull Request operations on GitHhub.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline__event animated fadeInUp delay-1s timeline__event--type3">
+                <div class="timeline__event__icon">
+                    <i class="lni-slim"></i>
+                </div>
+                <div class="timeline__event__date">15th Oct 2022</div>
+                <div class="timeline__event__content">
+                    <div class="timeline__event__title">Q & A Session</div>
+                    <div class="timeline__event__description">
+                        <p id="exercise_timeline">
+                            Questions and Answers session for clearing your doubts.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CONTAINER -->
+    </section>
+    <!-- END NEWSLETTER -->
+    <!-- CONTACT SECTION START-->
+    <section id="contact" class="atf-contact-area atf-section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="row clearfix justify-content-center">
+                    <div class="col-lg-6 col-xl-6">
+                        <div class="atf-section-title text-center wow zoomIn" data-wow-duration="1s"
+                            data-wow-delay="0.2s" data-wow-offset="0">
+                            <h5 class="">Contact</h5>
+                            <h2 class="">Get In Touch</h2>
+                            <div class="divide"></div>
+                            <!-- <p class="mx-auto my-auto">
+                                Lorem elementum Sed congue nisl dolorSed congue nisl dolor
+                                Lorem elementum Sed congue nisl dolorSed.
+                            </p> -->
+                        </div>
+                    </div>
+                </div>
+                <!--- END ROW -->
+                <div class="col-lg-7 col-md-7 col-sm-12 my-auto mx-auto">
+                    <div class="contact wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+                        <h4 class="ms-4">Stay Connected with us</h4>
+                        <form id="contactForm" class="atf-contact-form form">
+                            <input type="hidden" value="{{ csrf_token }}" name="csrfmiddlewaretoken" />
+
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <input type="text" name="name" class="form-control" id="name"
+                                        placeholder="Your Name" required="required" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="email" name="email" class="form-control" id="form_email"
+                                        placeholder="Your Email" required="required" />
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <input type="text" name="subject" class="form-control" id="subject"
+                                        placeholder="Your Subject" required="required" />
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <textarea rows="6" name="message" class="form-control" id="query"
+                                        placeholder="Your Message" required="required"></textarea>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="actions atf-contact-btn text-left">
+                                        <button type="submit" value="Submit Now" name="submit" id="submitButton"
+                                            class="d-flex align-items-center btn atf-themes-btn"
+                                            title="Submit Your Message!">
+                                            <span>Send Message</span>
+                                            <span id="msg_icon"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="formResult" class="form-message"></div>
+                    </div>
+                </div>
+                <!--- END COL -->
+                <div class="col-lg-5 col-md-5 col-12">
+                    <div class="atf-contact-info ml-lg-5 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s"
+                        data-wow-offset="0">
+                        <div class="atf-contact-details">
+                            <i class="fa fa-home"></i>
+                            <h4>Address</h4>
+                            <p>Zeal College of Engineering and Research, Narhe, Pune, Maharashtra, 411041</p>
+                        </div>
+                        <div class="atf-contact-details">
+                            <i class="fa fa-phone"></i>
+                            <h4>Mobile Number</h4>
+                            <p>+91 8766445827</p>
+                        </div>
+                        <div class="atf-contact-details">
+                            <i class="fa fa-envelope"></i>
+                            <h4>Email Address</h4>
+                            <p>iodump01@gmail.com</p>
+                        </div>
+                    </div>
+                    <!--- END CONTACT -->
+                </div>
+                <!--- END COL -->
+            </div>
+            <!--- END ROW -->
+        </div>
+        <!--- END CONTAINER -->
+    </section>
+    <!-- CONTACT SECTION END-->
+    <!-- Google Map start-->
+    <div id="atf-map-area">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d695.324367718586!2d73.82455331396945!3d18.449125074659996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2953b77f3439b%3A0x9f12ebdc1a822d0a!2sZeal%20Central%20Placement%20Cell!5e0!3m2!1sen!2sin!4v1665243842915!5m2!1sen!2sin"
+            width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <!-- Google Map end -->
+    <!-- FAQS  -->
+    <h2 id="h2_faq">Frequently Asked Questions</h2>
+    <br />
+    <div class="content">
+        <div>
+            <input type="checkbox" id="question1" name="q" class="questions" />
+            <div class="plus">+</div>
+            <label for="question1" class="question">
+                What's there for you in the Events? 
+            </label>
+            <div class="answers">
+                This is a basic workshop in which we will conduct session on open source, live demonstration on
+                git/GitHub and
+                taking the first step for Hacktoberfest by creating your First PR.
+            </div>
+        </div>
+        <div>
+            <input type="checkbox" id="question2" name="q" class="questions" />
+            <div class="plus">+</div>
+            <label for="question2" class="question">Are there any prerequisite for this event ?</label>
+            <div class="answers">Nope, this event doesn't require any prerequisite but knowledge about open source
+                and git
+                will help.</div>
+        </div>
+        <div>
+            <input type="checkbox" id="question3" name="q" class="questions" />
+            <div class="plus">+</div>
+            <label for="question3" class="question">
+                What all things are expected for the entry to the event ?
+            </label>
+            <div class="answers">
+                <ul class="px-2" style="list-style-type: circle;">
+                    <li>
+                        Ticket for the event which you can get <here (make this a link)>
+                    </li>
+                    <li>
+                        College Identity Card.
+                    </li>
+                    <li>
+                        (Optional) If you can bring Laptop then it would be great so that you can implement the
+                        things then and
+                        there without any interruption.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End of FAQS -->
+    <!-- FOOTER SECTION START-->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-brand" id="icon_id_footer">
+                        <img src="./assets/img/io-dump-white.png" alt="" class="footer-logo" />
+                        <p class="slogan">
+                            IODump . A perfect partner for your technical boon.
+                        </p>
+                        <div class="social-link">
+                            <a href="https://www.instagram.com/iodump01/" class="fs-4 me-2" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://github.com/iodump01" class="fs-4" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <p class="copyright-text">
+                        Copyright &copy; 2022 All Rights Reserved by
+                        <a href="/">IODump ZCOER</a>
+                    </p>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="d-flex align-items-center justify-content-center social-icons">
+                        <span class="me-2">Made with</span>
+                        <i class="fa fa-heart text-danger me-2"></i>
+                        <span>By: ZCOER Firefox Club</span>
+                        <!-- Credit: Harsh Kumar -->
+                        <!-- Akash Yadav -->
+                        <!-- Yash Dubbalwar -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="stick_top_id">
+        <div id="stick_top_id">
+            <div href="#top" class="go-top" id="go_top_id" data-go-top>
+                <div class="navigation">
+                    <ul class="listWrap">
+                        <li class="list active">
+                            <a href="javascript:void(0);" id="home_button">
+                                <i class="icon" id="home_button">
+                                    <ion-icon name="home-outline"></ion-icon>
+                                </i>
+                                <span class="text">Home</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a href="javascript:void(0);" id="icon_id_cast">
+                                <i class="icon">
+                                    <ion-icon name="help-outline"></ion-icon>
+                                </i>
+                                <span class="text">About</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a href="javascript:void(0);" id="icon_id_recommend">
+                                <i class="icon">
+                                    <ion-icon name="bookmark-outline"></ion-icon>
+                                </i>
+                                <span class="text">Register</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a href="javascript:void(0);" id="icon_id_popular">
+                                <i class="icon">
+                                    <ion-icon name="alarm-outline"></ion-icon>
+                                </i>
+                                <span class="text">Schedule</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a href="javascript:void(0);" id="icon_id_about">
+                                <i class="icon">
+                                    <ion-icon name="location-outline"></ion-icon>
+                                </i>
+                                <span class="text">Location</span>
+                            </a>
+                        </li>
+                        <li class="indicator"></li>
+                    </ul>
+                </div>
+                <ion-icon name="chevron-up"></ion-icon>
+            </div>
+        </div>
+        <!--- END FOOTER -->
+    </div>
+    <!-- PAGE WRAPPER END-->
+    <script>
+        var btn = $("#home_button");
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 50) {
+                btn.addClass("show");
+            } else {
+                btn.removeClass("show");
+            }
+        });
+        btn.on("click", function (e) {
+            e.preventDefault();
+            $("html, body").animate({
+                    scrollTop: 0,
+                },
+                "500"
+            );
+        });
+        $("#icon_id_cast").click(function () {
+            $("html, body").animate({
+                    scrollTop: $("#about").offset().top,
+                },
+                700
+            );
+        });
+        $("#icon_id_recommend").click(function () {
+            $("html, body").animate({
+                    scrollTop: $("#promotion_id").offset().top,
+                },
+                700
+            );
+        });
+        $("#icon_id_popular").click(function () {
+            $("html, body").animate({
+                    scrollTop: $("#event").offset().top,
+                },
+                700
+            );
+        });
+        $("#icon_id_about").click(function () {
+            $("html, body").animate({
+                    scrollTop: $("#icon_id_footer").offset().top,
+                },
+                700
+            );
+        });
+    </script>
+    <!-- modernizer JS -->
+    <script src="assets/js/modernizr.custom.js"></script>
+    <!-- owl-carousel min js  -->
+    <script src="assets/owlcarousel/js/owl.carousel.min.js"></script>
+    <!-- stellar js -->
+    <script src="assets/js/jquery.stellar.min.js"></script>
+    <!-- tilt js -->
+    <script src="assets/js/tilt.jquery.js"></script>
+    <!-- jquery.appear js -->
+    <script src="assets/js/jquery.appear.min.js"></script>
+    <!-- easing js -->
+    <script src="assets/js/easing.min.js"></script>
+    <!-- wow js -->
+    <script src="assets/js/wow.min.js"></script>
+    <!-- main js -->
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
+    {% endblock body %}

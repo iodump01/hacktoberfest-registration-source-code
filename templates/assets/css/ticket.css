@@ -1,0 +1,52 @@
+.ticket-container {
+  padding-top: 2em;
+  justify-content: space-between;
+}
+
+.table-ticket-info {
+  margin: auto;
+  border: 2px solid rgba(37, 137, 244, 0.2);
+
+}
+
+.table-ticket-info th,
+td {
+  padding: 0.5rem;
+}
+
+.qr-image {
+  width: 200px;
+  height: 200px;
+  padding: 0;
+}
+
+.image-caption {
+  font-style: italic;
+  font-size: large;
+  text-indent: 0;
+  border: thin silver solid;
+  padding: 0.5em;
+  background-color: aliceblue;
+  font-weight: bold;
+  color: rgb(242, 119, 19);
+}
+
+.main-heading {
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.5rem;
+  border: thin silver solid;
+  background-color: aliceblue;
+  color: rgb(228, 37, 165)
+}
+.save-button
+{
+  float: right;
+  margin: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  background-color: rgb(18, 119, 243);
+  border-radius: 10px;
+  color: white;
+  padding: 0.5rem;
+}

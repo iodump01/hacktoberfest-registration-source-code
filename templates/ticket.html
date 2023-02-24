@@ -1,0 +1,59 @@
+{% extends 'html_wrapper.html' %} {% block head %}
+<style>
+  {% include 'assets/css/ticket.css' %}
+</style>
+{% endblock head %} {% block body %}
+<div class="container">
+  <div class="ticket-container" style="overflow-x: auto" id="ticket">
+    <table class="table-ticket-info">
+      <tr>
+        <th colspan="2" class="main-heading">IODump HactoberFest 2k22</th>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: center">
+          <figure>
+            <p>
+              <img class="qr-image" src="{{qr_code}}" alt="QR Code" />
+              <figcaption class="image-caption">#{{ticketId}}</figcaption>
+            </p>
+          </figure>
+        </td>
+      </tr>
+
+      <tr>
+        <th>Issued to:</th>
+        <td>{{name}}</td>
+      </tr>
+      <tr>
+        <th>Event Name:</th>
+        <td>Introduction to Open Source</td>
+      </tr>
+      <tr>
+        <th>Date:</th>
+        <td>15th Oct, 2022</td>
+      </tr>
+      <tr>
+        <th>Ticket Type</th>
+        <td>Free</td>
+      </tr>
+      <tr>
+        <th>Time:</th>
+        <td>10:00 AM - 01:00 PM</td>
+      </tr>
+      <tr>
+        <th>Venue:</th>
+        <td>Zeal College Of Engineering And Research</td>
+      </tr>
+      <tr>
+        <th>Address:</th>
+        <td>
+          Survey No, 39, Dhayari Narhe Rd, <br />Narhe, Pune, Maharashtra 411041
+        </td>
+      </tr>
+    </table>
+  </div>
+  <a href="{{qr_code}}" download="{{ticketId}}.png" class="save-button">
+    SAVE QR
+  </a>
+</div>
+{% endblock body %}

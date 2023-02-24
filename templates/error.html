@@ -1,0 +1,13 @@
+{% extends 'html_wrapper.html' %} {% block body %}
+<div class="container text-center h3 text-danger mt-5">
+    Status Code: {{status}}
+    Something went wrong. Try again later.
+        {% if exception %}
+        <div class="container text-danger">
+            {{exception}}
+        </div>
+    {% endif %}
+
+     
+</div>
+{% endblock body %}

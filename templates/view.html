@@ -1,0 +1,27 @@
+{% extends 'html_wrapper.html' %} {% block head %}
+<style>
+  @media print {
+
+      {% include 'assets/css/ticket.css' %}
+  }
+</style>
+{% endblock head %} {% block body %} {% include 'ticket.html' %}
+
+<div class="container">
+  <button type="button" class="save-button" onclick="printTicket()">
+    Print
+  </button>
+</div>
+<script>
+  function printTicket() {
+    let printContents = document.getElementById("ticket").innerHTML;
+    let originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+  }
+</script>
+{% endblock body %}
