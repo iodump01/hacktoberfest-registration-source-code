@@ -1,5 +1,6 @@
-# Hacktoberfest website developed by IODump  Tech team , Zeal College Pune
-Source Code of IODump - Hacktoberfest 2022 . By using this website users can register user and registered users can fetch their details. Registered user will get email on their respective Email-ID provided during registration containing QR code and other details of the event. Admin can get details of the all the registered users.
+# IODump - Hacktoberfest 2022
+
+IODump - Hacktoberfest 2022 is a website developed by the IODump Tech Team. The website allows users to register and provides registered users with the ability to fetch their details. After registration, users will receive an email with a QR code and other event details sent to the email address they provided during registration. Admins can view details of all registered users.
 
 ## HacktoberFest 2022 Home Page 
 
